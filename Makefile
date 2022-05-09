@@ -6,7 +6,7 @@
 #    By: kamin <kamin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/29 15:48:31 by kamin             #+#    #+#              #
-#    Updated: 2022/05/07 01:01:18 by kamin            ###   ########.fr        #
+#    Updated: 2022/05/09 23:58:18 by kamin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC		=	main.c \
 			output.c \
 			philo.c \
 			thread_manipulation.c \
+			operations.c \
 
 OBJS	=	$(addprefix $(DIR_S),$(SRC:.c=.o))
 

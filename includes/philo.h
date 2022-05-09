@@ -6,7 +6,7 @@
 /*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 15:52:59 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/07 01:16:28 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/10 01:01:52 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <pthread.h>
+# include <stdio.h>
 # include "structs.h"
 
 /*MAIN ALGO*/
@@ -37,6 +38,11 @@ int		ft_isnum(char *s);
 char	*ft_itoa(int n);
 size_t	ft_strlen(const char *s);
 int		ft_atoi(const char *str);
+
+/*OPERATIONS*/
+void	pick_forks(t_philo *philo);
+void	eat(t_philo *philo);
+void	sleep_op(t_philo *philo);
 
 /*Output Handling*/
 void	ft_putstr_fd(char *s, int fd);

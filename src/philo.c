@@ -6,7 +6,7 @@
 /*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 23:34:15 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/07 00:58:46 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/10 01:13:38 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,15 @@ int	philo(t_container *cont)
 	int	error;
 
 	error = philo_create(cont);
-	if (!error)
-	{
-		
-	}
-	return (0);
+	return (error);
 }
 
-void	*philo_fn(void * p_data)
+void	*philo_fn(void *p_data)
 {
+	t_philo	*philo;
+
+	philo = p_data;
+	while (1)
+		pick_forks(philo);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 23:36:52 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/07 01:16:37 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/10 01:10:29 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@
 
 typedef struct s_philo
 {
-	int				status;
-	int				fork;
-	pthread_mutex_t	fork_mutex;
-	pthread_t		self;
+	int					status;
+	int					fork;
+	int					num;
+	pthread_mutex_t		fork_mutex;
+	pthread_mutex_t		*right;
+	pthread_t			self;
+	struct t_container	*info;
 }				t_philo;
 
 typedef struct t_container{
