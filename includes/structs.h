@@ -6,7 +6,7 @@
 /*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 23:36:52 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/10 01:10:29 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/10 04:03:06 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,24 @@ typedef struct s_philo
 	int					fork;
 	int					num;
 	pthread_mutex_t		fork_mutex;
+	pthread_mutex_t		time_mutex;
 	pthread_mutex_t		*right;
 	pthread_t			self;
+	pthread_t			monitor;
 	struct t_container	*info;
+	long long			last_eat;
 }				t_philo;
 
 typedef struct t_container{
-	int				num;
-	int				die;
-	int				eat;
-	int				sleep;
-	int				min_eat;
-	t_philo			*philos;
+	int					num;
+	int					die;
+	int					eat;
+	int					sleep;
+	int					min_eat;
+	int					done;
+	pthread_mutex_t		done_mutex;
+	t_philo				*philos;
+	struct timeval		created;
 }				t_container;
 
 #endif 

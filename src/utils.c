@@ -6,7 +6,7 @@
 /*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 17:30:18 by kamin             #+#    #+#             */
-/*   Updated: 2022/04/29 17:47:40 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/10 02:53:55 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,15 @@ int	ft_atoi(const char *str)
 		str++;
 	}
 	return (final * sign);
+}
+
+long long	get_time(t_philo *philo)
+{
+	long long		time;
+	struct timeval	now;
+
+	gettimeofday(&now, NULL);
+	time = (now.tv_sec * 1000) - (philo->info->created.tv_sec * 1000);
+	time += (now.tv_usec / 1000) - (philo->info->created.tv_usec / 1000);
+	return (time);
 }
