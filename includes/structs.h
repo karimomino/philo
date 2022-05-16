@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 23:36:52 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/10 04:03:06 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/16 16:41:25 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ typedef struct s_philo
 	int					status;
 	int					fork;
 	int					num;
+	int					min_eat;
 	pthread_mutex_t		fork_mutex;
 	pthread_mutex_t		time_mutex;
+	pthread_mutex_t		min_mutex;
 	pthread_mutex_t		*right;
 	pthread_t			self;
 	pthread_t			monitor;
@@ -37,8 +39,9 @@ typedef struct t_container{
 	int					min_eat;
 	int					done;
 	pthread_mutex_t		done_mutex;
+	pthread_mutex_t		print_mutex;
 	t_philo				*philos;
 	struct timeval		created;
 }				t_container;
 
-#endif 
+#endif

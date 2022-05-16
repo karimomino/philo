@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread_manipulation.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 00:58:21 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/10 03:40:56 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/16 22:23:58 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	philo_create(t_container *cont)
 		(*cont).philos[i].status = -1;
 		(*cont).philos[i].num = i + 1;
 		(*cont).philos[i].info = cont;
+		(*cont).philos[i].min_eat = 0;
 	}
 	create_monitors(cont);
 	return (philo_join(cont));

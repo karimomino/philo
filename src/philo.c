@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 23:34:15 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/10 04:14:34 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/16 22:22:52 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+static int	eat_check(t_container *cont)
+{
+	int	done;
+	int	i;
+
+	done = 1;
+	i = -1;
+	while (++i < (*cont).num)
+	{
+		if ((*cont).philos[i].min_eat < (*cont).min_eat || (*cont).philos[i].info->min_eat == -1)
+			done = 0;
+	}
+	return (done);
+}
 
 int	philo_init(int ac, char **av)
 {
@@ -30,6 +45,7 @@ int	philo_init(int ac, char **av)
 	if (philos.philos == NULL)
 		return (-1);
 	pthread_mutex_init(&philos.done_mutex, NULL);
+	pthread_mutex_init(&philos.print_mutex, NULL);
 	return (philo(&philos));
 }
 
@@ -46,6 +62,7 @@ void	*philo_fn(void *data)
 	t_philo	*philo;
 
 	philo = data;
+
 	while (philo->info->done == 0)
 		pick_forks(philo);
 	return (NULL);
@@ -64,12 +81,18 @@ void	*monitor_fn(void *data)
 		time = get_time(philo);
 		if (time - philo->last_eat >= philo->info->die)
 		{
-			printf("%lld Philo %d Died.\n", time, philo->num);
+			printf("\033[0;31m%lld Philo %d Died with %d eats.\n\033[0m", time, philo->num, philo->min_eat);
 			philo->info->done = 1;
 			return (NULL);
 		}
-		pthread_mutex_unlock(&philo->time_mutex);
+		if (eat_check(philo->info))
+		{
+			printf("Everyone Ate!\n");
+			philo->info->done = 1;
+			return (NULL);
+		}
 		pthread_mutex_unlock(&philo->info->done_mutex);
+		pthread_mutex_unlock(&philo->time_mutex);
 	}
 	return (NULL);
 }
