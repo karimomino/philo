@@ -6,7 +6,7 @@
 /*   By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 23:36:52 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/16 16:41:25 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/19 01:31:04 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 typedef struct s_philo
 {
 	int					status;
-	int					fork;
 	int					num;
 	int					min_eat;
 	pthread_mutex_t		fork_mutex;
@@ -39,9 +38,11 @@ typedef struct t_container{
 	int					min_eat;
 	int					done;
 	pthread_mutex_t		done_mutex;
+	pthread_mutex_t		check_mutex;
 	pthread_mutex_t		print_mutex;
+	int					*forks;
 	t_philo				*philos;
-	struct timeval		created;
+	size_t				created;
 }				t_container;
 
 #endif

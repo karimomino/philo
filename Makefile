@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kamin <kamin@student.42.fr>                +#+  +:+       +#+         #
+#    By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/29 15:48:31 by kamin             #+#    #+#              #
-#    Updated: 2022/05/09 23:58:18 by kamin            ###   ########.fr        #
+#    Updated: 2022/05/18 20:53:21 by kamin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC		=	main.c \
 			philo.c \
 			thread_manipulation.c \
 			operations.c \
+			time.c \
 
 OBJS	=	$(addprefix $(DIR_S),$(SRC:.c=.o))
 

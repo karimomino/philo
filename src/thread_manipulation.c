@@ -6,7 +6,7 @@
 /*   By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 00:58:21 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/16 22:23:58 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/19 01:34:20 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,14 @@ static int	create_monitors(t_container *cont)
 
 int	philo_create(t_container *cont)
 {
-	int	error;
-	int	i;
+	int				error;
+	int				i;
+	struct timeval	time;
 
 	error = 0;
 	i = -1;
+	gettimeofday(&time, NULL);
+	cont->created = ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 	init_mutex(cont);
 	while (++i < (*cont).num)
 	{
@@ -73,11 +76,10 @@ int	philo_create(t_container *cont)
 			ft_putstr_fd("\033[0;31mError Creating Thread\n", 2);
 			return (-1);
 		}
-		(*cont).philos[i].fork = 1;
-		(*cont).philos[i].status = -1;
-		(*cont).philos[i].num = i + 1;
-		(*cont).philos[i].info = cont;
-		(*cont).philos[i].min_eat = 0;
+		cont->philos[i].status = -1;
+		cont->philos[i].num = i + 1;
+		cont->philos[i].info = cont;
+		cont->philos[i].min_eat = 0;
 	}
 	create_monitors(cont);
 	return (philo_join(cont));
@@ -93,6 +95,7 @@ int	philo_join(t_container *cont)
 	while (++i < (*cont).num)
 	{
 		error = pthread_join ((*cont).philos[i].self, NULL);
+		printf("\nHere\n");
 		if (error)
 		{
 			ft_putstr_fd("\033[0;31mError Joining Threads\n", 2);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 15:52:59 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/10 03:15:32 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/19 01:35:04 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ char		*ft_itoa(int n);
 size_t		ft_strlen(const char *s);
 int			ft_atoi(const char *str);
 long long	get_time(t_philo *philo);
+void		ft_usleep(size_t time);
+size_t		get_current_time(void);
 
 /*OPERATIONS*/
 void		pick_forks(t_philo *philo);

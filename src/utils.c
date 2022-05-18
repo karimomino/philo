@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 17:30:18 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/10 02:53:55 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/19 01:36:07 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,8 @@ int	ft_atoi(const char *str)
 
 long long	get_time(t_philo *philo)
 {
-	long long		time;
-	struct timeval	now;
+	size_t		time;
 
-	gettimeofday(&now, NULL);
-	time = (now.tv_sec * 1000) - (philo->info->created.tv_sec * 1000);
-	time += (now.tv_usec / 1000) - (philo->info->created.tv_usec / 1000);
+	time = get_current_time() - philo->info->created;
 	return (time);
 }

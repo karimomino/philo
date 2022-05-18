@@ -6,7 +6,7 @@
 /*   By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 23:53:06 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/16 22:27:27 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/19 01:19:49 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ void	eat(t_philo *philo)
 	time = get_time(philo);
 	pthread_mutex_lock(&philo->time_mutex);
 	pthread_mutex_lock(&philo->min_mutex);
+	philo->last_eat = get_time(philo);
 	if (!philo->info->done)
 		printf("\033[0;32m%lld Philo %d is eating.\n\033[0m", time, philo->num);
-	philo->last_eat = get_time(philo);
 	philo->min_eat++;
-	usleep(philo->info->eat * 1000);
+	ft_usleep(philo->info->eat);
 	if (philo->num % 2 > 0)
 	{
 		pthread_mutex_unlock(&philo->fork_mutex);
@@ -80,6 +80,6 @@ void	sleep_op(t_philo *philo)
 	time = get_time(philo);
 	if (!philo->info->done)
 		printf("\033[0;34m%lld Philo %d is sleeping.\n\033[0m", time, philo->num);
-	usleep(philo->info->sleep * 1000);
+	ft_usleep(philo->info->sleep);
 	think(philo);
 }
