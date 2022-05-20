@@ -6,7 +6,7 @@
 /*   By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 15:52:59 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/19 01:35:04 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/19 15:07:00 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void		sleep_op(t_philo *philo);
 
 /*Output Handling*/
 void		ft_putstr_fd(char *s, int fd);
+void	print_message(t_philo *philo, int type);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 23:34:15 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/19 01:34:03 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/19 15:14:53 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static int	eat_check(t_container *cont)
 	i = -1;
 	while (++i < (*cont).num)
 	{
-		if ((*cont).philos[i].min_eat < (*cont).min_eat || (*cont).philos[i].info->min_eat == -1)
+		if ((*cont).philos[i].min_eat < (*cont).min_eat
+			|| (*cont).philos[i].info->min_eat == -1)
 			done = 0;
 	}
 	return (done);
@@ -66,7 +67,6 @@ void	*philo_fn(void *data)
 	t_philo	*philo;
 
 	philo = data;
-
 	while (philo->info->done == 0)
 		pick_forks(philo);
 	return (NULL);
@@ -85,7 +85,9 @@ void	*monitor_fn(void *data)
 		time = get_time(philo);
 		if (time - philo->last_eat > philo->info->die)
 		{
-			printf("\033[0;31m%lld Philo %d Died with %d eats.\n\033[0m", time, philo->num, philo->min_eat);
+			print_message(philo, 4);
+			// printf("\033[0;31m%lld Philo %d Died with %d eats.\n\033[0m",
+			// 	time, philo->num, philo->min_eat);
 			philo->info->done = 1;
 			return (NULL);
 		}
