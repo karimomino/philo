@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 23:36:52 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/22 15:55:58 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/24 01:09:52 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct t_container{
 	int					done;
 	pthread_mutex_t		done_mutex;
 	pthread_mutex_t		check_mutex;
+	pthread_mutex_t		dead_mutex;
 	pthread_mutex_t		print_mutex;
 	int					*forks;
 	t_philo				*philos;

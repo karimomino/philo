@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread_manipulation.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 00:58:21 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/22 14:18:22 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/24 01:11:27 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,17 @@ static void	init_mutex(t_container *cont)
 	int	i;
 
 	i = -1;
-	while (++i < (*cont).num)
+	while (++i < cont->num)
 	{
-		pthread_mutex_init(&(*cont).philos[i].fork_mutex, NULL);
-		pthread_mutex_init(&(*cont).philos[i].time_mutex, NULL);
+		pthread_mutex_init(&cont->philos[i].fork_mutex, NULL);
+		pthread_mutex_init(&cont->philos[i].time_mutex, NULL);
+		pthread_mutex_init(&cont->philos[i].min_mutex, NULL);
 	}
 	init_right(cont);
+	pthread_mutex_init(&cont->done_mutex, NULL);
+	pthread_mutex_init(&cont->check_mutex, NULL);
+	pthread_mutex_init(&cont->print_mutex, NULL);
+	pthread_mutex_init(&cont->dead_mutex, NULL);
 }
 
 static int	create_monitors(t_container *cont)
@@ -51,7 +56,7 @@ static int	create_monitors(t_container *cont)
 			ft_putstr_fd("\033[0;31mError Creating Thread\n", 2);
 			return (-1);
 		}
-		pthread_detach((*cont).philos[i].monitor);
+		pthread_join((*cont).philos[i].monitor, NULL);
 	}
 	return (0);
 }
@@ -69,6 +74,12 @@ int	philo_create(t_container *cont)
 	init_mutex(cont);
 	while (++i < (*cont).num)
 	{
+		cont->philos[i].status = -1;
+		cont->philos[i].num = i + 1;
+		cont->philos[i].info = cont;
+		cont->philos[i].min_eat = 0;
+		cont->philos[i].forks = 0;
+		cont->philos[i].last_eat = 0;
 		error = pthread_create(&(*cont).philos[i].self,
 				NULL, philo_fn, &(*cont).philos[i]);
 		if (error)
@@ -76,10 +87,6 @@ int	philo_create(t_container *cont)
 			ft_putstr_fd("\033[0;31mError Creating Thread\n", 2);
 			return (-1);
 		}
-		cont->philos[i].status = -1;
-		cont->philos[i].num = i + 1;
-		cont->philos[i].info = cont;
-		cont->philos[i].min_eat = 0;
 	}
 	create_monitors(cont);
 	return (philo_join(cont));
@@ -95,12 +102,16 @@ int	philo_join(t_container *cont)
 	while (++i < (*cont).num)
 	{
 		error = pthread_join ((*cont).philos[i].self, NULL);
-		printf("\nHere\n");
 		if (error)
 		{
 			ft_putstr_fd("\033[0;31mError Joining Threads\n", 2);
 			return (-1);
 		}
+		pthread_mutex_destroy(&(*cont).philos[i].fork_mutex);
+		pthread_mutex_destroy(&(*cont).philos[i].min_mutex);
+		pthread_mutex_destroy(&(*cont).philos[i].time_mutex);
 	}
+	free(cont->philos);
+	free(cont->forks);
 	return (0);
 }
