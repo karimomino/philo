@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+        */
+/*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 20:43:27 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/19 01:34:45 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/22 14:24:41 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,12 @@ void	ft_usleep(size_t sleep)
 	{
 		usleep(25);
 	}
+}
+
+long long	get_time(t_philo *philo)
+{
+	size_t		time;
+
+	time = get_current_time() - philo->info->created;
+	return (time);
 }

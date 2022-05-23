@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+        */
+/*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 15:52:59 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/19 15:07:00 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/22 15:10:59 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int			ft_atoi(const char *str);
 long long	get_time(t_philo *philo);
 void		ft_usleep(size_t time);
 size_t		get_current_time(void);
+void		free_unlock(void *cont);
 
 /*OPERATIONS*/
 void		pick_forks(t_philo *philo);
@@ -51,6 +52,6 @@ void		sleep_op(t_philo *philo);
 
 /*Output Handling*/
 void		ft_putstr_fd(char *s, int fd);
-void	print_message(t_philo *philo, int type);
+void		print_message(t_philo *philo, int type);
 
 #endif

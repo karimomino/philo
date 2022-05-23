@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+        */
+/*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 17:30:18 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/19 01:36:07 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/22 15:24:03 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,17 @@ int	ft_atoi(const char *str)
 	return (final * sign);
 }
 
-long long	get_time(t_philo *philo)
+void	free_unlock(void *cont)
 {
-	size_t		time;
+	t_philo	*container;
 
-	time = get_current_time() - philo->info->created;
-	return (time);
+	container = cont;
+	pthread_mutex_destroy(&container->fork_mutex);
+	pthread_mutex_destroy(&container->min_mutex);
+	pthread_mutex_destroy(&container->time_mutex);
+	pthread_mutex_destroy(&container->info->check_mutex);
+	pthread_mutex_destroy(&container->info->done_mutex);
+	pthread_mutex_destroy(&container->info->print_mutex);
+	free(container->info->philos);
+	container->info->philos = NULL;
 }

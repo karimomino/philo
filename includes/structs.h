@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+        */
+/*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 23:36:52 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/19 01:31:04 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/22 15:55:58 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_philo
 	int					status;
 	int					num;
 	int					min_eat;
+	int					forks;
 	pthread_mutex_t		fork_mutex;
 	pthread_mutex_t		time_mutex;
 	pthread_mutex_t		min_mutex;
