@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+        */
+/*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 23:34:15 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/24 01:43:19 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/24 17:54:09 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
-static int	eat_check(t_container *cont)
-{
-	int	done;
-	int	i;
-
-	done = 1;
-	i = -1;
-	while (++i < (*cont).num)
-	{
-		pthread_mutex_lock(&cont->philos[i].min_mutex);
-		if ((*cont).philos[i].min_eat < (*cont).min_eat
-			|| (*cont).philos[i].info->min_eat == -1)
-			done = 0;
-		pthread_mutex_unlock(&cont->philos[i].min_mutex);
-	}
-	return (done);
-}
 
 int	philo_init(int ac, char **av)
 {
@@ -51,17 +33,7 @@ int	philo_init(int ac, char **av)
 		return (-1);
 	while (++i < philos.num)
 		philos.forks[i] = 1;
-	// pthread_mutex_init(&philos.done_mutex, NULL);
-	// pthread_mutex_init(&philos.print_mutex, NULL);
 	return (philo(&philos));
-}
-
-int	philo(t_container *cont)
-{
-	int	error;
-
-	error = philo_create(cont);
-	return (error);
 }
 
 void	*philo_fn(void *data)
@@ -69,48 +41,8 @@ void	*philo_fn(void *data)
 	t_philo	*philo;
 
 	philo = data;
-	while (philo->info->done == 0)
+	while (set_done(philo, 1) == 0)
 		pick_forks(philo);
 	free_unlock(philo);
-	return (NULL);
-}
-
-static void	set_done(t_philo *philo)
-{
-	// pthread_mutex_lock(&philo->info->done_mutex);
-	philo->info->done = 1;
-	// pthread_mutex_unlock(&philo->info->done_mutex);
-}
-
-void	*monitor_fn(void *data)
-{
-	t_philo		*philo;
-	long long	time;
-
-	philo = data;
-	while (1)
-	{
-		pthread_mutex_lock(&philo->time_mutex);
-		time = get_time(philo);
-		if (time - philo->last_eat > philo->info->die)
-		{
-			pthread_mutex_lock(&philo->info->done_mutex);
-			set_done(philo);
-			print_message(philo, 4);
-			pthread_mutex_unlock(&philo->info->done_mutex);
-			// free_unlock(philo);
-			return (NULL);
-		}
-		if (eat_check(philo->info))
-		{
-			pthread_mutex_lock(&philo->info->done_mutex);
-			set_done(philo);
-			print_message(philo, 5);
-			pthread_mutex_unlock(&philo->info->done_mutex);
-			// free_unlock(philo);
-			return (NULL);
-		}
-		pthread_mutex_unlock(&philo->time_mutex);
-	}
 	return (NULL);
 }

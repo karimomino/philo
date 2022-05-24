@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+        */
+/*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 15:52:59 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/23 22:09:51 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/24 18:18:18 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,24 @@ int			philo_init(int ac, char **av);
 void		*philo_fn(void *p_data);
 void		*monitor_fn(void *p_data);
 
+/*MUTEX HANDLING*/
+void		init_mutex(t_container *cont);
+
 /*THREAD HANDLING*/
-int			philo_create(t_container *cont);
 int			philo_join(t_container *cont);
+
+/*MONITORING*/
+int			set_done(t_philo *philo, int type);
 
 /*ERROR HANDLING*/
 int			error_handler(int argc, char **argv);
 int			check_args(int argc, char **argv);
 int			check_negs(int argc, char **argv);
+
+/*FORK HANDELR*/
+void		take_fork(t_philo *philo, int which);
+void		put_fork(t_philo *philo);
+int			set_fork(t_philo *philo, int fork, int val, int type);
 
 /*UTILITY FUNCTIONS*/
 int			ft_isnum(char *s);

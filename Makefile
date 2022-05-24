@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+         #
+#    By: kamin <kamin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/29 15:48:31 by kamin             #+#    #+#              #
-#    Updated: 2022/05/24 00:53:00 by kamin            ###   ########.fr        #
+#    Updated: 2022/05/24 18:02:09 by kamin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,15 @@ SRC		=	main.c \
 			thread_manipulation.c \
 			operations.c \
 			time.c \
+			monitor.c \
+			mutex.c \
+			fork_handler.c \
 
 OBJS	=	$(addprefix $(DIR_S),$(SRC:.c=.o))
 
 CC		=	gcc
 
-CFLAGS	=	-Wall -Werror -Wextra -g3 -lpthread
+CFLAGS	=	-Wall -Werror -Wextra -g3 -pthread
 
 RED=\033[0;31m
 

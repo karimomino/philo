@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamin <kamin@42abudhabi.ae>                +#+  +:+       +#+        */
+/*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 17:30:18 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/24 00:30:37 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/24 17:47:27 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,19 +92,21 @@ int	ft_atoi(const char *str)
 
 void	free_unlock(void *cont)
 {
-	t_philo	*container;
-	int		i;
+	t_philo	*philo;
 
-	i = -1;
-	container = cont;
-	while (++i < container->info->num)
+	philo = cont;
+	if (philo->num % 2 && philo->forks == 1)
+		pthread_mutex_unlock(&philo->fork_mutex);
+	else if (philo->num % 2 && philo->forks == 2)
 	{
-		if (container->info->forks[i] == 0)
-			pthread_mutex_unlock(&container->info->philos[i].fork_mutex);
+		pthread_mutex_unlock(&philo->fork_mutex);
+		pthread_mutex_unlock(philo->right);
 	}
-	// pthread_mutex_destroy(&container->info->check_mutex);
-	// pthread_mutex_destroy(&container->info->done_mutex);
-	// pthread_mutex_destroy(&container->info->print_mutex);
-	// free(container->info->philos);
-	// container->info->philos = NULL;
+	else if (!(philo->num % 2) && philo->forks == 1)
+		pthread_mutex_unlock(philo->right);
+	else if (!(philo->num % 2) && philo->forks == 2)
+	{
+		pthread_mutex_unlock(philo->right);
+		pthread_mutex_unlock(&philo->fork_mutex);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 20:43:27 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/22 14:24:41 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/24 17:47:42 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ long long	get_time(t_philo *philo)
 {
 	size_t		time;
 
+	pthread_mutex_lock(&philo->time_mutex);
 	time = get_current_time() - philo->info->created;
+	pthread_mutex_unlock(&philo->time_mutex);
 	return (time);
 }
