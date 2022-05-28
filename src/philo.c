@@ -6,7 +6,7 @@
 /*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 23:34:15 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/24 17:54:09 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/28 14:32:49 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	philo_init(int ac, char **av)
 		return (-1);
 	while (++i < philos.num)
 		philos.forks[i] = 1;
+	philos.all = 0;
 	return (philo(&philos));
 }
 

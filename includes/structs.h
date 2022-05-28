@@ -6,7 +6,7 @@
 /*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 23:36:52 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/24 14:58:26 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/28 14:26:40 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct t_container{
 	int					sleep;
 	int					min_eat;
 	int					done;
+	int					all;
 	pthread_mutex_t		done_mutex;
 	pthread_mutex_t		check_mutex;
 	pthread_mutex_t		dead_mutex;

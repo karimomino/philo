@@ -6,33 +6,36 @@
 /*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:51:07 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/06 23:29:57 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/28 14:45:09 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	error_handler(int argc, char **argv)
+static int	check_negs(int argc, char **argv)
 {
+	int	i;
 	int	error;
 
+	i = 0;
 	error = 1;
-	if (argc < 5)
+	while (error > 0 && ++i < argc)
 	{
-		ft_putstr_fd("\033[0;31mToo few arguments\n", 2);
-		error = -1;
+		if (ft_atoi(argv[i]) < 1 && i == 1)
+		{
+			ft_putstr_fd("\033[0;31mYou need at least 1 philosopher.\n", 2);
+			error = -1;
+		}
+		else if (ft_atoi(argv[i]) < 0)
+		{
+			ft_putstr_fd("\033[0;31mAll arguments must not be negative.\n", 2);
+			error = -1;
+		}
 	}
-	else if (argc > 6)
-	{
-		ft_putstr_fd("\033[0;31mToo many arguments\n", 2);
-		error = -1;
-	}
-	else
-		error = check_args(argc, argv);
 	return (error);
 }
 
-int	check_args(int argc, char **argv)
+static int	check_args(int argc, char **argv)
 {
 	int		i;
 	int		error;
@@ -55,25 +58,22 @@ int	check_args(int argc, char **argv)
 	return (error);
 }
 
-int	check_negs(int argc, char **argv)
+int	error_handler(int argc, char **argv)
 {
-	int	i;
 	int	error;
 
-	i = 0;
 	error = 1;
-	while (error > 0 && ++i < argc)
+	if (argc < 5)
 	{
-		if (ft_atoi(argv[i]) < 1 && i == 1)
-		{
-			ft_putstr_fd("\033[0;31mYou need at least 1 philosopher.\n", 2);
-			error = -1;
-		}
-		else if (ft_atoi(argv[i]) < 0)
-		{
-			ft_putstr_fd("\033[0;31mAll arguments must not be negative.\n", 2);
-			error = -1;
-		}
+		ft_putstr_fd("\033[0;31mToo few arguments\n", 2);
+		error = -1;
 	}
+	else if (argc > 6)
+	{
+		ft_putstr_fd("\033[0;31mToo many arguments\n", 2);
+		error = -1;
+	}
+	else
+		error = check_args(argc, argv);
 	return (error);
 }

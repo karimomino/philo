@@ -6,7 +6,7 @@
 /*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 15:52:59 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/24 18:18:18 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/28 14:45:14 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int			set_done(t_philo *philo, int type);
 
 /*ERROR HANDLING*/
 int			error_handler(int argc, char **argv);
-int			check_args(int argc, char **argv);
-int			check_negs(int argc, char **argv);
 
 /*FORK HANDELR*/
 void		take_fork(t_philo *philo, int which);
@@ -57,8 +55,6 @@ void		free_unlock(void *cont);
 
 /*OPERATIONS*/
 void		pick_forks(t_philo *philo);
-// void		eat(t_philo *philo);
-// void		sleep_op(t_philo *philo);
 
 /*Output Handling*/
 void		ft_putstr_fd(char *s, int fd);
