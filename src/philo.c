@@ -6,7 +6,7 @@
 /*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 23:34:15 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/28 14:32:49 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/29 11:01:33 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	philo_init(int ac, char **av)
 	philos.forks = (int *)malloc(philos.num * sizeof(t_philo));
 	if (philos.philos == NULL || philos.forks == NULL)
 		return (-1);
+	philos.all = 0;
 	while (++i < philos.num)
 		philos.forks[i] = 1;
-	philos.all = 0;
 	return (philo(&philos));
 }
 

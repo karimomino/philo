@@ -6,7 +6,7 @@
 /*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 23:53:06 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/24 18:01:39 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/29 11:11:56 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	pick_forks(t_philo *philo)
 			|| philo->min_eat == 0))
 	{
 		take_fork(philo, 1);
+		if (philo->info->num == 1)
+			ft_usleep(philo->info->die);
 		take_fork(philo, 2);
 	}
 	else if (philo->num % 2 == 0 && !set_done(philo, 1) && (time >= time_diff

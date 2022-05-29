@@ -6,7 +6,7 @@
 /*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 09:50:20 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/24 15:04:13 by kamin            ###   ########.fr       */
+/*   Updated: 2022/05/29 11:20:15 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,15 @@ void	*monitor_fn(void *data)
 	philo = data;
 	while (1)
 	{
-		time = get_time(philo);
 		pthread_mutex_lock(&philo->last_mutex);
-		if (time - philo->last_eat > philo->info->die)
+		time = get_time(philo) - philo->last_eat;
+		pthread_mutex_unlock(&philo->last_mutex);
+		if (time > philo->info->die)
 		{
 			set_done(philo, 2);
 			print_message(philo, 4);
 			return (NULL);
 		}
-		pthread_mutex_unlock(&philo->last_mutex);
 		if (eat_check(philo->info))
 		{
 			set_done(philo, 2);
