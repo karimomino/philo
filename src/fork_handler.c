@@ -6,7 +6,7 @@
 /*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 17:59:09 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/24 18:01:18 by kamin            ###   ########.fr       */
+/*   Updated: 2022/06/02 17:03:01 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,6 @@ void	put_fork(t_philo *philo)
 		pthread_mutex_unlock(philo->right);
 		pthread_mutex_unlock(&philo->fork_mutex);
 	}
+	else if (philo->info->num == 1 && philo->forks > 0)
+		pthread_mutex_unlock(&philo->fork_mutex);
 }

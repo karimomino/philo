@@ -6,7 +6,7 @@
 /*   By: kamin <kamin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 23:53:06 by kamin             #+#    #+#             */
-/*   Updated: 2022/05/29 11:11:56 by kamin            ###   ########.fr       */
+/*   Updated: 2022/06/02 16:57:44 by kamin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	think(t_philo *philo)
 
 static void	sleep_op(t_philo *philo)
 {
-	if (!set_done(philo, 1))
+	if (!set_done(philo, 1) && philo->forks == 2)
 	{
 		print_message(philo, 2);
 		ft_usleep(philo->info->sleep);
@@ -67,7 +67,8 @@ void	pick_forks(t_philo *philo)
 		take_fork(philo, 1);
 		if (philo->info->num == 1)
 			ft_usleep(philo->info->die);
-		take_fork(philo, 2);
+		else
+			take_fork(philo, 2);
 	}
 	else if (philo->num % 2 == 0 && !set_done(philo, 1) && (time >= time_diff
 			|| philo->min_eat == 0))
